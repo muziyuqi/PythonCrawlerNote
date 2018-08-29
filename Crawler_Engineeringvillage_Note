@@ -1,0 +1,9 @@
+
+关于https协议：verify=False，需要在get中添加这个
+response = session.get(First_url, headers = post_header, verify=False)
+
+
+
+
+
+
