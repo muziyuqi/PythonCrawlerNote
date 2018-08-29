@@ -1,0 +1,80 @@
+
+
+
+获取“1535507371353”格式的时间：
+def getMilliTim():
+    t = time.time()
+    nowTime = t*1000
+    return int(nowTime)
+    
+时间格式化：
+    import datetime
+    Nowtime = datetime.datetime.now()
+    print(Nowtime.strftime("%Y-%m-%d %H:%M:%S"))
+    
+%a Abbreviated weekday name 
+%A Full weekday name 
+%b Abbreviated month name 
+%B Full month name 
+%c Date and time representation appropriate for locale 
+%d Day of month as decimal number (01 - 31) 
+%H Hour in 24-hour format (00 - 23) 
+%I Hour in 12-hour format (01 - 12) 
+%j Day of year as decimal number (001 - 366) 
+%m Month as decimal number (01 - 12) 
+%M Minute as decimal number (00 - 59) 
+%p Current locale's A.M./P.M. indicator for 12-hour clock 
+%S Second as decimal number (00 - 59) 
+%U Week of year as decimal number, with Sunday as first day of week (00 - 51) 
+%w Weekday as decimal number (0 - 6; Sunday is 0) 
+%W Week of year as decimal number, with Monday as first day of week (00 - 51) 
+%x Date representation for current locale 
+%X Time representation for current locale 
+%y Year without century, as decimal number (00 - 99) 
+%Y Year with century, as decimal number 
+%z, %Z Time-zone name or abbreviation; no characters if time zone is unknown 
+%% Percent sign
+
+
+将参数加到url里
+    import urllib
+    params_1 = {
+    "action": "Recommend_tip",
+    "kw": "苏州大学",
+    "dbcode": dbPrefix,
+    "selectedField": "单位",
+    "valueFiled": "FT$%=|,SU$%=|,TI$%=|,AU$=|,AF$%,KY$=|,AB$%=|,RF$%=|,CLC$=|??,LY$=|,",
+    "__":temptime
+    }
+    postdata=urllib.parse.urlencode(params_1)
+    print(url + postdata)
+    response = session.get(url + postdata, headers = post_header)
+
+伪造cookie原来可以这么玩：
+        cookie = 'cnkiUserKey=e0b40271-cdc0-fd83-36fa-9d4c5f8f2a86; RsPerPage=5' \
+                 '0; KNS_DisplayModel=custommode@CJFQ; UM_distinctid=161275ba757a' \
+                 '16-0ed232d4ab2da2-6010107f-15f900-161275ba75895e; Ecp_Cli' \
+                 'entId=3170915092701569567; ASP.NET_SessionId=3dnqvlsxovsla4' \
+                 'ywvr2ykp4c; SID_kns=123106; SID_crrs=125131; SID_klogin=12514' \
+                 '3; SID_krsnew=125132; SID_kcms=124113; SID_knsdelivery=125124;' \
+                 ' CNZZDATA3258975=cnzz_eid%3D995934993-1516843818-http%253A%252' \
+                 'F%252Fkns.cnki.net%252F%26ntime%3D1517383256; Ecp_session=1; ' \
+                 'c_m_LinID=LinID=WEEvREcwSlJHSldRa1FhdkJkVWI2VUJNODFzUHlUaC9LN' \
+                 'XZrUDkrcXhYbz0=$9A4hF_YAuvQ5obgVAqNKPCYcEjKensW4ggI8Fm4gTkoU' \
+                 'KaID8j8gFw!!&ot=02/01/2018 18:13:09; LID=WEEvREcwSlJHSldRa1F' \
+                 'hdkJkVWI2VUJNODFzUHlUaC9LNXZrUDkrcXhYbz0=$9A4hF_YAuvQ5obgVAqN' \
+                 'KPCYcEjKensW4ggI8Fm4gTkoUKaID8j8gFw!!; c_m_expire=2018-02-01 ' \
+                 '18:13:09; Ecp_LoginStuts=%7B%22IsAutoLogin%22%3Afalse%2C%22U' \
+                 'serName%22%3A%22KT1008%22%2C%22ShowName%22%3A%22%25E8%25A5%2' \
+                 '5BF%25E5%258D%2597%25E7%259F%25B3%25E6%25B2%25B9%25E5%25A4%' \
+                 '25A7%25E5%25AD%25A6%22%2C%22UserType%22%3A%22bk%22%2C%22r%2' \
+                 '2%3A%22RrMW7A%22%7D'
+
+        headers = {'User-Agent': user_agent,
+                   "Referer": referer,
+                   "cookie": cookie}
+
+
+
+
+
