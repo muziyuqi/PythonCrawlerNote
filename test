@@ -1,0 +1,66 @@
+import pickle
+import _thread
+from sklearn.linear_model import LinearRegression
+from Arduino import Arduino_Communication as AC2
+import CSV_RW
+
+x_trains = list(map(str, list(range(3))))
+y_trains = list(map(str, list(range(16, 18))))
+
+finger_angle_data = {
+    "Thumb": [0,1,2],
+    "forefinger": [4, 5,6],
+    "midfinger": [7,8, 9],
+    "ringfinger": [10,11, 12],
+    "littlefinger": [13, 14,15]
+}
+finger_angle_data_bendonly = [
+    [0, 0],  # Thumb: 1bend  2bend
+    [0, 0],  # forefinger: 1bend  2bend
+    [0, 0],  # midfinger: 1bend  2bend
+    [0, 0],  # ringfinger: 1bend  2bend
+    [0, 0]  # littlefinger: 1bend  2bend
+]
+
+
+def OLS_Basic(ols_model):
+    X_data = CSV_RW.get_source_Xdata('GloveSensorData.csv', columns_name=x_trains, TSS='StandardScaler.pkl')
+
+    for i in range(len(y_trains)):
+        y_data = CSV_RW.get_source_Ydata('GloveSensorData.csv', columns_name=[y_trains[i]])
+        ols_model[i].fit(X_data, y_data)
+        # print(lr[i].intercept_)
+        # print(lr[i].coef_)
+        # print(lr[i].score(X_data, y_data))
+        # print(lr[i].predict(sklearn.preprocessing.scale([[8697, 8995, 11592]],axis=1)))  # 0,0,0
+        # print(lr[i].predict(sklearn.preprocessing.scale([[8722, 8982, 11588]],axis=1))) # 0,0,45
+        # print(lr[i].predict(sklearn.preprocessing.scale([[8725, 8904, 11588]],axis=1))) # 0,0,90
+    return ols_model
+
+
+OLS_Model = [LinearRegression() for i in range(len(finger_angle_data))]
+
+
+def print_data(handle_data):
+    handle_data = AC2.AD2FloatList(handle_data)[:len(x_trains)]
+    if handle_data:
+        sensor_data = Train_StandardScaler.transform([handle_data])
+        for i in range(len(y_trains)):
+            tmp = OLS_Model[i].predict(sensor_data)
+            # print(int(tmp[0]), end=",")
+            print("%.2f" % tmp[0], end=",")
+        print()
+
+
+def OSLmodel():
+    global Train_StandardScaler
+    global OLS_Model
+    
+    
+    OLS_Model = OLS_Basic(OLS_Model)
+    Train_StandardScaler = pickle.load(open("StandardScaler.pkl", 'rb'))
+    _thread.start_new_thread(AC2._threadAdnData, ('USB Serial', 115200, True, print_data))
+
+
+OSLmodel()
+input()
